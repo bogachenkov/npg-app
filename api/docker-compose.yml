@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  # client_dev:
+  #   build: ./client
+  #   command: sh -c "yarn dev"
+  #   container_name: "client_dev"
+  #   ports:
+  #     - ${CLIENT_PORT}:${CLIENT_CONTAINER_PORT}
+  #   working_dir: /home/app/client
+  #   volumes:
+  #     - "./client:/home/app/client"
+  #     - "/home/app/client/node_modules"
+  #   env_file:
+  #     - .env
+  api_dev:
+    build: .
+    # command: sh -c "/usr/local/bin/wait-for-it postgresql yarn prisma migrate dev --name init && yarn dev"
+    container_name: "api_dev"
+    ports:
+      - ${API_PORT}:${API_CONTAINER_PORT}
+    working_dir: /home/app/api
+    volumes:
+      - .:/home/app/api
+      - /home/app/api/node_modules
+    restart: always
+    depends_on:
+      - postgresql
+    env_file:
+      - .env
+    # platform: "linux/amd64"
+  postgresql:
+    image: "postgres"
+    restart: always
+    volumes:
+      - ./db/data/postgres:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    env_file:
+      - .env

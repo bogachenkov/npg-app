@@ -1,0 +1,13 @@
+query allUsers {
+  users {
+    id,
+    username,
+    registeredAt
+  }
+}
+
+query allUsernames {
+  users {
+    username
+  }
+}
