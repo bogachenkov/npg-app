@@ -6,7 +6,8 @@
   "scripts": {
     "up": "docker-compose up",
     "dev": "cross-env NODE_ENV=development ts-node-dev --exit-child --respawn index.ts",
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "seed": "ts-node scripts/index.ts"
   },
   "dependencies": {
     "@graphql-tools/schema": "^8.3.13",
